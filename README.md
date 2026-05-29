@@ -33,6 +33,18 @@ A higher health score means the recipe has more protein compared to carbs.
 <!-- Add bivariate plot iframe here -->
 
 <!-- Add aggregate table here -->
+<iframe
+ src="assets/protein_carbs_plot.html"
+ width="800"
+ height="600"
+ frameborder="0"
+></iframe>
+<iframe
+ src="assets/fairness_plot.html"
+ width="800"
+ height="600"
+ frameborder="0"
+></iframe>
 
 ## Assessment of Missingness
 
