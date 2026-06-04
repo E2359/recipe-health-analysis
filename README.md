@@ -98,7 +98,7 @@ For one test, I checked whether the missingness of avg_rating depends on calorie
  frameborder="0"
 ></iframe>
 
-Based on the permutation tests, I found that the missingness of avg_rating appears to depend on at least one recipe feature, but not necessarily on every nutrition feature. This suggests that missing ratings are not completely random. In other words, whether a recipe has an average rating may be related to other recipe characteristics.
+Based on the permutation tests, the missingness of avg_rating seemed to depend on calories because the p-value was small. This means recipes with missing average ratings had a noticeably different calorie distribution compared to recipes with non-missing ratings. However, the missingness of avg_rating did not seem to depend on protein because the p-value was larger. This means I do not have strong evidence that recipes with missing ratings have different protein values compared to recipes with non-missing ratings.
 
 ## Hypothesis Testing
 
@@ -153,7 +153,7 @@ For my final model, I used a Random Forest Regressor to predict protein. I chose
 
 Compared to the baseline model, I added more nutrition-related features, including total_fat, sugar, sodium, and saturated_fat. I also engineered new features: log_minutes, steps_per_minute, carbs_per_calorie, and fat_per_calorie. These features make sense for this prediction task because protein is part of the overall nutrition profile of a recipe. For example, carbs_per_calorie and fat_per_calorie help describe what kind of nutrients make up the recipe, while steps_per_minute gives a rough idea of recipe complexity.
 
-I used GridSearchCV to tune the Random Forest hyperparameters. The hyperparameters I searched over were n_estimators, max_depth, and min_samples_leaf. I tuned these because n_estimators controls the number of trees in the forest, max_depth controls how complex each tree can become, and min_samples_leaf controls how many samples must be in each leaf. These settings help balance model flexibility and overfitting.
+I used GridSearchCV to tune the Random Forest hyperparameters. The hyperparameters I searched over were n_estimators, max_depth, and min_samples_leaf. I tuned these because n_estimators controls the number of trees in the forest, max_depth controls how complex each tree can become, and min_samples_leaf controls how many samples must be in each leaf. These settings help balance model flexibility and overfitting. The best hyperparameters selected by GridSearchCV were max_depth = None, min_samples_leaf = 1, and n_estimators = 100.
 
 The final Random Forest model had an RMSE of about 21.32 and an R² value of about 0.77. This is an improvement over the baseline model, which had an RMSE of about 31.79 and an R² value of about 0.50. Since the final model has a lower RMSE, its protein predictions are closer to the true protein values on average. The higher R² also means the final model explains more of the variation in protein.
 
@@ -169,7 +169,7 @@ Alternative Hypothesis: My model is unfair. The RMSE for high-calorie recipes is
 
 Test Statistic: RMSE for high-calorie recipes minus RMSE for low-calorie recipes.
 
-I used a permutation test with a significance level of 0.05. In the test, I shuffled the calorie group labels while keeping the final model’s predictions the same. The p-value was 0.0, which is less than 0.05, so I rejected the null hypothesis.
+I used a permutation test with a significance level of 0.05. In the test, I shuffled the calorie group labels while keeping the final model’s predictions the same. The p-value was less than 0.001, which is less than 0.05, so I rejected the null hypothesis.
 
 Based on this test, there is evidence that my final model performs worse for high-calorie recipes than for low-calorie recipes. In other words, the model does not seem to be equally accurate across both calorie groups.
 
