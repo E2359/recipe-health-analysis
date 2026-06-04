@@ -38,6 +38,7 @@ To clean the data, I first replaced all ratings of 0 with NaN because a rating o
 The nutrition column originally stored values as one long string that looked like a list. To make the nutrition information easier to analyze, I split this column into separate columns: calories, total_fat, sugar, sodium, protein, saturated_fat, and carbohydrates. This was important because my project focuses on recipe health, especially protein and carbohydrates. I also created a new column called health_score, which is protein minus carbohydrates. A higher health_score means the recipe has more protein compared to carbs.
 
 Here is the head of my cleaned DataFrame:
+
 | name                                 |   minutes |   n_steps |   calories |   protein |   carbohydrates |   avg_rating |   health_score |
 |:-------------------------------------|----------:|----------:|-----------:|----------:|----------------:|-------------:|---------------:|
 | 1 brownies in the world    best ever |        40 |        10 |      138.4 |         3 |               6 |            4 |             -3 |
